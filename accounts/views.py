@@ -44,7 +44,7 @@ class RegistrationApiView(APIView):
             uid= urlsafe_base64_encode(force_bytes(user.pk))   # uid full form unique id, variable; create a unique id
             print(uid)
             print("this is token",token)
-            confirm_link= f"http://127.0.0.1:8000/user/active/{uid}/{token}" # Created this confirm unquie id for a user to verify him/her.
+            confirm_link= f"https://smart-rent.vercel.app/user/active/{uid}/{token}" # Created this confirm unquie id for a user to verify him/her.
             email_subject= "Confirm Your Email"
             email_body= render_to_string('accounts/confirm_mail.html', {'confirm_link':confirm_link})
             email= EmailMultiAlternatives(email_subject, '', to=[user.email])
@@ -62,7 +62,7 @@ def ActivateAccount(request, uid64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active= True
         user.save()
-        return redirect('http://127.0.0.1:5500/frontend/login.html')
+        return redirect('https://smart-rent-web.netlify.app/login.html')
     return redirect('register')
 
 class UserProfileUpdateView(APIView):
@@ -103,7 +103,7 @@ class UserLogoutView(APIView):
         print(request.user)
         request.user.auth_token.delete()
         logout(request)
-        return redirect('http://127.0.0.1:5500/frontend/login.html')
+        return redirect('https://smart-rent-web.netlify.app/login.html')
 
 
 class ChangePasswordView(APIView):
