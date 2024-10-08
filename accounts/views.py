@@ -99,11 +99,13 @@ class UserLoginView(APIView):
 
 class UserLogoutView(APIView):
     # permission_classes = [IsAuthenticated]
+    serializer_class= UserLoginSerializer
     def get(self, request):
         print(request.user)
         request.user.auth_token.delete()
         logout(request)
-        return redirect('https://smart-rent-web.netlify.app/login.html')
+        return Response({"success": "Logout Successful"})
+        # return redirect('https://smart-rent.vercel.app/account/api-auth/login/')
 
 
 class ChangePasswordView(APIView):
