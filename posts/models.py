@@ -47,7 +47,7 @@ class PostModel(models.Model):
         ],null= True, blank=True
     )
     additional_information= models.CharField(max_length=100, null=True, blank=True)
-    image= models.ImageField(upload_to='post_images/', null= True, blank=True)
+    image_url= models.URLField(max_length=512, null=True, blank=True)
     owner= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     available_from= models.CharField(max_length=10, choices=MONTHS)
     rent= models.DecimalField(max_digits=12, decimal_places=2)
