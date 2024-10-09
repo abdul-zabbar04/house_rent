@@ -7,7 +7,6 @@ class PostSerializer(serializers.ModelSerializer):
     district= serializers.SlugRelatedField(many= False, slug_field='slug', queryset= District.objects.all())
     class Meta:
         model= PostModel
-        # fields= ['id', 'on_created', 'on_updated', 'title', 'bedrooms', 'bathrooms', 'balcony', 'floor_number', 'additional_information', 'image', 'category', 'owner', 'available_from', 'rent', 'district', 'area']
         fields= '__all__'
         read_only_fields=['owner', 'on_created', 'on_updated', 'is_published', 'is_order', 'is_accepted']
 
